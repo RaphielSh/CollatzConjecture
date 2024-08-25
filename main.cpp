@@ -1,6 +1,7 @@
 #include<iostream>
 #include<stdexcept>
 #include<unordered_set>
+#include<chrono>
 
 std::unordered_set<long long unsigned int> num_cache;
 
@@ -29,7 +30,9 @@ void checkConjectureVerbose(long long unsigned int num){
 	while(1!=num){
 		num=(num%2)?(3*num)+1 : num/2;
 		if(lst.contains(num))std::cout<<"Infinite loop with number "<<num<<std::endl;
+		if(num_cache.contains(num))break;
 	}
+	num_cache.insert(num);
 	std::cout<<"Succeed!"<<std::endl;
 }
 
@@ -58,10 +61,16 @@ void checkRangeFullVerbose(long long unsigned int begin, long long unsigned int 
 int main(){
 	
 	try{
-		std::cout<<"Number cache test: "<<checkConjecture(222)<<std::endl;
-		std::cout<<"==========================="<<std::endl;
-		std::cout<<checkConjecture(444)<<std::endl;
-		//		std::cout<<"checkConjectureVerbose test"<<std::endl;
+		std::cout<<"benchmark"<<std::endl;
+		auto t_start = std::chrono::high_resolution_clock::now();
+		checkRangeVerbose(1,100000);
+		auto t_end = std::chrono::high_resolution_clock::now();
+		std::chrono::duration<double, std::milli> t_res = t_end-t_start;
+		std::cout<<"\nTime used to calculate 100000 ops: "<<t_res;
+//		std::cout<<"Number cache test: "<<checkConjecture(222)<<std::endl;
+//		std::cout<<"==========================="<<std::endl;
+//		std::cout<<checkConjecture(444)<<std::endl;
+//		std::cout<<"checkConjectureVerbose test"<<std::endl;
 //		checkConjectureVerbose(35);
 //		std::cout<<"===========\ncheckRangeVerbose test"<<std::endl;
 //		checkRangeVerbose(65, 145);
