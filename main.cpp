@@ -18,9 +18,8 @@ bool checkConjecture(long long unsigned int num){
 		if(lst.contains(num))return false;	//infinite loop prevention
 		lst.insert(num);
 		if(num_cache.contains(num)) return true;	//cached numbers gonna return true immediately
+    num_cache.insert(num);
 	}
-	num_cache.insert(num);
-	print(lst);
 	return true;
 }
 
@@ -61,12 +60,12 @@ void checkRangeFullVerbose(long long unsigned int begin, long long unsigned int 
 int main(){
 	
 	try{
-		std::cout<<"benchmark"<<std::endl;
-		auto t_start = std::chrono::high_resolution_clock::now();
-		checkRangeVerbose(1,100000);
-		auto t_end = std::chrono::high_resolution_clock::now();
-		std::chrono::duration<double, std::milli> t_res = t_end-t_start;
-		std::cout<<"\nTime used to calculate 100000 ops: "<<t_res;
+		//std::cout<<"benchmark"<<std::endl;
+		//auto t_start = std::chrono::high_resolution_clock::now();
+		//checkRangeVerbose(1,100000);
+		//auto t_end = std::chrono::high_resolution_clock::now();
+		//std::chrono::duration<double, std::milli> t_res = t_end-t_start;
+		//std::cout<<"\nTime used to calculate 100000 ops: "<<t_res;
 //		std::cout<<"Number cache test: "<<checkConjecture(222)<<std::endl;
 //		std::cout<<"==========================="<<std::endl;
 //		std::cout<<checkConjecture(444)<<std::endl;
